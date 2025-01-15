@@ -216,12 +216,110 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/rgMetodoPago"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="aqui se elige el metodo de pago"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:orientation="vertical"
+                    android:background="@android:color/white"
+                    android:padding="16dp">
+
+                    <RadioButton
+                        android:id="@+id/rbEfectivo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pago en Efectivo" />
+
+                    <RadioButton
+                        android:id="@+id/rbTarjeta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pago con Tarjeta" />
+                </RadioGroup>
+
+                <!-- Sección de Pago en Efectivo -->
+                <LinearLayout
+                    android:id="@+id/llPagoEfectivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="16dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total: $0.00"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#333"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Sección de Pago con Tarjeta -->
+                <LinearLayout
+                    android:id="@+id/llPagoTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="16dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="16dp">
+
+                    <EditText
+                        android:id="@+id/etNumeroTarjeta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Número de Tarjeta"
+                        android:inputType="number"
+                        android:maxLength="16"
+                        android:padding="12dp"
+                        android:background="@drawable/edit_text_background" />
+
+                    <EditText
+                        android:id="@+id/etCVV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CVV"
+                        android:inputType="numberPassword"
+                        android:maxLength="3"
+                        android:padding="12dp"
+                        android:background="@drawable/edit_text_background"
+                        android:layout_marginTop="8dp" />
+
+                    <EditText
+                        android:id="@+id/etFechaVencimiento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Fecha de Vencimiento (MM/AA)"
+                        android:inputType="date"
+                        android:padding="12dp"
+                        android:background="@drawable/edit_text_background"
+                        android:layout_marginTop="8dp" />
+
+                    <Button
+                        android:id="@+id/btnPagarTarjeta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pagar"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/white"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+                <!-- Botón de Confirmar Pago en Efectivo -->
+                <Button
+                    android:id="@+id/btnConfirmarEfectivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmar Pago en Efectivo"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
