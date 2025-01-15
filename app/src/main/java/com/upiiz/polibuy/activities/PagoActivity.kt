@@ -1,4 +1,4 @@
-package com.example.proyectofinal.activities
+package com.upiiz.polibuy.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

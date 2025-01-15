@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        recyclerView = findViewById(R.id.recycler_productos)
+        recyclerView = findViewById(R.id.rvListaProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)
         productAdapter = ProductAdapter(
             productList, addCar = {producto -> productoEspecifico(producto) }
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun cargarProductos(){
         val database = Firebase.database
-        val productRef = database.getReference("Productos")
+        val productRef = database.getReference("Producto")
 
         productRef.orderByKey().limitToLast(5).get().addOnSuccessListener { dataSnapshot ->
             productList.clear()
