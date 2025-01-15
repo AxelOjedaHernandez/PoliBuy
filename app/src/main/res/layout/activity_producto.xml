@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductoActivity">
+    tools:context=".activities.ProductoActivity">
     <!-- Título de la pantalla -->
     <TextView
         android:id="@+id/tvProductosTitle"
@@ -39,7 +39,7 @@
 
     <!-- RecyclerView para la lista de productos -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListaProductos"
+        android:id="@+id/rvProductosListaProductos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"

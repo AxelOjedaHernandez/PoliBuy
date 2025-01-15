@@ -16,7 +16,10 @@
         android:theme="@style/Theme.PoliBuy"
         tools:targetApi="31">
         <activity
-            android:name=".ProductoActivity"
+            android:name=".activities.ProductoEspecificoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ProductoActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ThanksActivity"
