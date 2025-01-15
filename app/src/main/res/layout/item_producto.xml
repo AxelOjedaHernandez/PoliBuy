@@ -65,13 +65,13 @@
         <!-- Botón para agregar al carrito -->
         <Button
             android:id="@+id/itemAddToCartButton"
-            android:layout_width="55dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:backgroundTint="@android:color/holo_green_light"
             android:text="+"
-            android:textSize="26sp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="26sp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

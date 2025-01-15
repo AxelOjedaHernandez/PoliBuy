@@ -16,6 +16,9 @@
         android:theme="@style/Theme.PoliBuy"
         tools:targetApi="31">
         <activity
+            android:name=".ProductoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ThanksActivity"
             android:exported="false" />
         <activity
@@ -34,7 +37,7 @@
             android:name=".activities.LoginActivity"
             android:exported="true"
             android:label="@string/app_name">
->>>>>>> 51f43b81ca8f75da8f223b5bde89921ad8302541
+            >>>>>>> 51f43b81ca8f75da8f223b5bde89921ad8302541
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
