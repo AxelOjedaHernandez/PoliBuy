@@ -1,4 +1,4 @@
-package com.example.proyectofinal.activities
+package com.upiiz.polibuy.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,15 +9,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.proyectofinal.R
-import com.example.proyectofinal.data.Producto
-import com.example.proyectofinal.data.Usuario
+import com.example.proyectofinal.activities.RegisterActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
+import com.upiiz.polibuy.R
 
 class LoginActivity : AppCompatActivity() {
     private val database = Firebase.database
