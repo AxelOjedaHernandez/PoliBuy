@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "467456339298",
+    "project_id": "polibuy",
+    "storage_bucket": "polibuy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467456339298:android:b709b64a3f069799d3903b",
+        "android_client_info": {
+          "package_name": "com.example.proyectofinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvhco85iVIpi0WMRQ4Scpm75idtebc-k0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
