@@ -44,6 +44,21 @@ class ProductoActivity : AppCompatActivity() {
         )
         recyclerView.adapter = productAdapter
         cargarProductos()
+        btnProductos.setOnClickListener {
+            val ProductosIntent = Intent(this@ProductoActivity, ProductoActivity::class.java)
+            ProductosIntent.putExtra("idUsuario", idUsuario)
+            startActivity(ProductosIntent)
+        }
+        btnCarrito.setOnClickListener {
+            val CarritoIntent = Intent(this@ProductoActivity, CarritoActivity::class.java)
+            CarritoIntent.putExtra("idUsuario", idUsuario)
+            startActivity(CarritoIntent)
+        }
+        btnInicio.setOnClickListener {
+            val InicioIntent = Intent(this@ProductoActivity, MainActivity::class.java)
+            InicioIntent.putExtra("idUsuario", idUsuario)
+            startActivity(InicioIntent)
+        }
     }
 
     private fun productoEspecifico(producto: Producto){
