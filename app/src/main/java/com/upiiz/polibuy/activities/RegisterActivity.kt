@@ -12,8 +12,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.proyectofinal.data.Usuario
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
-import com.google.firebase.messaging.FirebaseMessaging
 import com.upiiz.polibuy.R
+import com.upiiz.polibuy.activities.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
     private val database = Firebase.database
@@ -54,13 +54,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         // Obtén el token de Firebase Messaging
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Toast.makeText(this, "No se pudo obtener el token", Toast.LENGTH_LONG).show()
-                return@addOnCompleteListener
-            }
-
-            val token = task.result
 
             // Crea el objeto Usuario con los valores
             val empleado = Usuario(usuarioId, clave, nombre, correo)
@@ -73,7 +66,6 @@ class RegisterActivity : AppCompatActivity() {
             }.addOnFailureListener { exception ->
                 Toast.makeText(this, "Error al agregar usuario", Toast.LENGTH_LONG).show()
             }
-        }
 
     }
 }
