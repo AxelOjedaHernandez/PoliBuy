@@ -19,7 +19,7 @@ class ProductoActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
     private val productList =  mutableListOf<Producto>()
-    private val idUsuario: String=""
+    private var idUsuario: String?=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +30,8 @@ class ProductoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        idUsuario = intent.getStringExtra("idUsuario")
 
         recyclerView = findViewById(R.id.rvProductosListaProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)

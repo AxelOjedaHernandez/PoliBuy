@@ -20,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private val database = Firebase.database
     private val myRef = database.getReference("Usuarios")
     private val productRef = database.getReference("Producto")
+    private var idUsuario: String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
                             val dbClave = userSnapshot.child("clave").value.toString()
                             if (dbClave == clave) {
                                 usuarioValido = true
+                                idUsuario = userSnapshot.child("id").value.toString()
                                 break
                             }
                         }
@@ -71,7 +73,8 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "Ingreso exitoso", Toast.LENGTH_LONG).show()
                             // Redirigir a otra actividad después de un inicio exitoso
                             val menuIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                            menuIntent.putExtra("usuarioActual", usuario)
+                            menuIntent.putExtra("idUsuario", idUsuario)
+
                             startActivity(menuIntent)
                             finish() // Finalizar la actividad actual
                         } else {

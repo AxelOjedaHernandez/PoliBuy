@@ -1,6 +1,8 @@
 package com.upiiz.polibuy.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
     private val productList =  mutableListOf<Producto>()
-    private val idUsuario: String=""
+    private var idUsuario: String?=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        idUsuario = intent.getStringExtra("idUsuario")
+        val btnProductos = findViewById<Button>(R.id.btnProducto)
+
         recyclerView = findViewById(R.id.rvListaProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)
         productAdapter = ProductAdapter(
@@ -37,6 +42,12 @@ class MainActivity : AppCompatActivity() {
         )
         recyclerView.adapter = productAdapter
         cargarProductos()
+
+        btnProductos.setOnClickListener {
+            val ProductosIntent = Intent(this@MainActivity, ProductoActivity::class.java)
+            ProductosIntent.putExtra("idUsuario", idUsuario)
+            startActivity(ProductosIntent)
+        }
     }
 
     private fun productoEspecifico(producto: Producto){
