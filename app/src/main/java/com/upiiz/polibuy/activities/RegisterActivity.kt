@@ -9,11 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.proyectofinal.R
 import com.example.proyectofinal.data.Usuario
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
 import com.google.firebase.messaging.FirebaseMessaging
+import com.upiiz.polibuy.R
 
 class RegisterActivity : AppCompatActivity() {
     private val database = Firebase.database
