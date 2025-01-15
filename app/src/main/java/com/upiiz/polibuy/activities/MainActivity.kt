@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         idUsuario = intent.getStringExtra("idUsuario")
         val btnProductos = findViewById<Button>(R.id.btnProducto)
+        val btnCarrito = findViewById<Button>(R.id.btnCarrito)
+        val btnInicio = findViewById<Button>(R.id.btnInicio)
 
         recyclerView = findViewById(R.id.rvListaProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -47,6 +49,16 @@ class MainActivity : AppCompatActivity() {
             val ProductosIntent = Intent(this@MainActivity, ProductoActivity::class.java)
             ProductosIntent.putExtra("idUsuario", idUsuario)
             startActivity(ProductosIntent)
+        }
+        btnCarrito.setOnClickListener {
+            val CarritoIntent = Intent(this@MainActivity, CarritoActivity::class.java)
+            CarritoIntent.putExtra("idUsuario", idUsuario)
+            startActivity(CarritoIntent)
+        }
+        btnInicio.setOnClickListener {
+            val InicioIntent = Intent(this@MainActivity, MainActivity::class.java)
+            InicioIntent.putExtra("idUsuario", idUsuario)
+            startActivity(InicioIntent)
         }
     }
 

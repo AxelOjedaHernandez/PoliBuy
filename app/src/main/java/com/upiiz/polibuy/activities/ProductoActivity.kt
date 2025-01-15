@@ -2,6 +2,7 @@ package com.upiiz.polibuy.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,9 @@ class ProductoActivity : AppCompatActivity() {
         }
 
         idUsuario = intent.getStringExtra("idUsuario")
+        val btnProductos = findViewById<Button>(R.id.btnProducto)
+        val btnCarrito = findViewById<Button>(R.id.btnCarrito)
+        val btnInicio = findViewById<Button>(R.id.btnInicio)
 
         recyclerView = findViewById(R.id.rvProductosListaProductos)
         recyclerView.layoutManager = LinearLayoutManager(this)

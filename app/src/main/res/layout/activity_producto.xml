@@ -6,6 +6,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ProductoActivity">
+
+    <!-- Barra superior con botones -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botón Inicio -->
+        <Button
+            android:id="@+id/btnInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_inicio"
+            android:drawablePadding="4dp"
+            android:backgroundTint="@color/color_botones"
+            android:text="Inicio"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <!-- Botón Producto -->
+        <Button
+            android:id="@+id/btnProducto"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_producto"
+            android:drawablePadding="4dp"
+            android:backgroundTint="@color/color_botones"
+            android:text="Producto"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <!-- Botón Carrito -->
+        <Button
+            android:id="@+id/btnCarrito"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_carrito"
+            android:drawablePadding="4dp"
+            android:backgroundTint="@color/color_botones"
+            android:text="Carrito"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
     <!-- Título de la pantalla -->
     <TextView
         android:id="@+id/tvProductosTitle"
@@ -18,7 +69,7 @@
         android:textStyle="bold"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/linearLayout" />
 
     <!-- Campo de búsqueda -->
     <EditText
