@@ -50,6 +50,7 @@ class ProductoEspecificoActivity : AppCompatActivity() {
         val tvProductPrice = findViewById<TextView>(R.id.productPrice)
         val tvProductQuantity = findViewById<TextView>(R.id.productQuantity)
         val btnaddToCart = findViewById<Button>(R.id.addToCartButton)
+        val btnBack = findViewById<Button>(R.id.backButton)
 
         // Asignar datos a los TextViews
         tvProductName.text = nombreProducto ?: "Producto no disponible"
@@ -62,6 +63,12 @@ class ProductoEspecificoActivity : AppCompatActivity() {
         btnAddToCart.setOnClickListener {
             agregarCarrito(idProducto, idUsuario)
         }
+        btnBack.setOnClickListener {
+            val intent = Intent(this@ProductoEspecificoActivity, MainActivity::class.java)
+            intent.putExtra("idUsuario", idUsuario)
+            startActivity(intent)
+        }
+
     }
 
     private fun agregarCarrito(idProducto: String?, idUsuario: String?) {
