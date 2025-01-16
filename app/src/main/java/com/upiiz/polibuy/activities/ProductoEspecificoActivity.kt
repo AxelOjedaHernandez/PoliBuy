@@ -1,5 +1,6 @@
 package com.upiiz.polibuy.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +8,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.upiiz.polibuy.R
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import com.example.proyectofinal.data.Carrito
+import com.example.proyectofinal.data.Usuario
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
 
 class ProductoEspecificoActivity : AppCompatActivity() {
+    private val database = Firebase.database
+    private val carritosRef = database.getReference("Carritos")
+
     private var idProducto: String?=""
     private var nombreProducto: String?=""
     private var descripcioProducto: String?=""
@@ -50,7 +60,19 @@ class ProductoEspecificoActivity : AppCompatActivity() {
         // Botón para agregar al carrito (sin funcionalidad por ahora)
         val btnAddToCart = findViewById<Button>(R.id.addToCartButton)
         btnAddToCart.setOnClickListener {
-            // Aquí podrías agregar la lógica para añadir al carrito
+            agregarCarrito(idProducto, idUsuario)
+        }
+    }
+
+    private fun agregarCarrito(idProducto: String?, idUsuario: String?) {
+        val carritoId = carritosRef.push().key!!
+
+        // Crea el objeto Usuario con los valores
+        val empleado = Carrito(carritoId, idProducto, idUsuario)
+        carritosRef.child(carritoId).setValue(empleado).addOnSuccessListener {
+            Toast.makeText(this, "Producto agregado exitosamente", Toast.LENGTH_LONG).show()
+        }.addOnFailureListener { exception ->
+            Toast.makeText(this, "Error al agregar Producto", Toast.LENGTH_LONG).show()
         }
     }
 }
