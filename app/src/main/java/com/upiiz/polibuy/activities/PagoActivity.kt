@@ -1,4 +1,4 @@
-package com.example.proyectofinal.activities
+package com.upiiz.polibuy.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.upiiz.polibuy.R
-import com.upiiz.polibuy.activities.ProductoActivity
 import com.upiiz.polibuy.activities.ThanksActivity
 
 class PagoActivity : AppCompatActivity() {

@@ -10,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyectofinal.activities.PagoActivity
 import com.example.proyectofinal.data.Producto
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Firebase
