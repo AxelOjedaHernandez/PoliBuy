@@ -19,15 +19,18 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.upiiz.polibuy.activities.CarritoActivity
 
 
 class CarAdapter(
-    private val productList: MutableList<Producto>
+    private val productList: MutableList<Producto>,
+    private val onTotalUpdated: (Int) -> Unit
 ) : RecyclerView.Adapter<CarAdapter.ProductCarViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductCarViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto_carrito, parent, false)
         return ProductCarViewHolder(view)
     }
+
     private val database = Firebase.database
     private val carritosRef = database.getReference("Carritos")
 
@@ -63,7 +66,8 @@ class CarAdapter(
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedQuantity = quantities[position]
                 producto.cantidad = selectedQuantity
-                // Aquí puedes actualizar el producto en la base de datos si es necesario
+                // Recalcula el total después de cambiar la cantidad
+                recalcularTotal()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -78,8 +82,7 @@ class CarAdapter(
 
     private fun eliminarProductoCarrito(idProducto: String?) {
         // Eliminar todos los carritos del usuario
-        carritosRef.orderByChild("productoId").equalTo(idProducto).addListenerForSingleValueEvent(object :
-            ValueEventListener {
+        carritosRef.orderByChild("productoId").equalTo(idProducto).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (carritoSnapshot in snapshot.children) {
@@ -96,6 +99,19 @@ class CarAdapter(
 
     override fun getItemCount(): Int = productList.size
 
+    fun recalcularTotal() {
+        var total = 0
+        for (producto in productList) {
+            total += (producto.precio ?: 0) * (producto.cantidad ?: 1)
+        }
+
+        // Comunica el total a la actividad
+        onTotalUpdated(total)
+        //(holder.itemView.context as? CarritoActivity)?.updateTotalText(total)
+
+    }
+
+
     class ProductCarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemProductName: TextView = itemView.findViewById(R.id.nombre_producto)
         val itemProductPrice: TextView = itemView.findViewById(R.id.precio_producto)
@@ -105,6 +121,5 @@ class CarAdapter(
         val btn_eliminar_producto: ImageButton = itemView.findViewById(R.id.btn_eliminar_producto)
 
     }
+
 }
-
-

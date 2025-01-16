@@ -53,14 +53,20 @@
                 android:textSize="14sp" />
 
             <!-- Estado del producto -->
+            <Spinner
+                android:id="@+id/itemProductSpinner"
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+
             <TextView
                 android:id="@+id/itemProductquantity"
-                android:layout_width="match_parent"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="11"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
+                android:layout_marginStart="8dp"
+                android:text="Cantidad: 1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

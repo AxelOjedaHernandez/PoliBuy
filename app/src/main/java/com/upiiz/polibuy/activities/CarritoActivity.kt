@@ -56,10 +56,14 @@ class CarritoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         recyclerView = findViewById(R.id.recycler_productos)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        productCarAdapter = CarAdapter(productList)
+
+        // Pasa el callback para actualizar el total
+        productCarAdapter = CarAdapter(productList) { total ->
+            updateTotalText(total)
+        }
+
         recyclerView.adapter = productCarAdapter
 
         cargarProductosDelCarrito(idUsuario)
@@ -121,7 +125,7 @@ class CarritoActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateTotalText(totalPrice: Int) {
+    fun updateTotalText(totalPrice: Int) {
         tvTotal?.let {
             val totalText = "Total: $${totalPrice}"
             it.text = totalText
@@ -129,6 +133,7 @@ class CarritoActivity : AppCompatActivity() {
             Toast.makeText(this, "Error al actualizar el total", Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun updateTotalItems(totalItems: Int) {
         val itemsText = "Artículos en carrito: $totalItems"
         tvArticulos.text = itemsText
