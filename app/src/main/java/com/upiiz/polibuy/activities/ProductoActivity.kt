@@ -65,9 +65,9 @@ class ProductoActivity : AppCompatActivity() {
         val productoIntent = Intent(this@ProductoActivity, ProductoEspecificoActivity::class.java)
         productoIntent.putExtra("idProducto", producto.id)
         productoIntent.putExtra("nombreProducto", producto.nombre)
-        productoIntent.putExtra("descripcionroducto", producto.descripcion)
-        productoIntent.putExtra("precioroducto", producto.precio)
-        productoIntent.putExtra("cantidadroducto", producto.cantidad)
+        productoIntent.putExtra("descripcionProducto", producto.descripcion) // Corregido
+        productoIntent.putExtra("precioProducto", producto.precio)
+        productoIntent.putExtra("cantidadProducto", producto.cantidad)
         productoIntent.putExtra("idUsuario", idUsuario)
         startActivity(productoIntent)
     }
@@ -81,14 +81,16 @@ class ProductoActivity : AppCompatActivity() {
             for (snapshot in dataSnapshot.children) {
                 val id = snapshot.child("id").value.toString()
                 val nombre = snapshot.child("nombre").value.toString()
-                val precio = snapshot.child("precio").value.toString().toIntOrNull()
-                val cantidad = snapshot.child("cantidad").value.toString().toIntOrNull()
+                val precio = snapshot.child("precio").getValue(Int::class.java)
+                val cantidad = snapshot.child("cantidad").getValue(Int::class.java)
+                val descripcion = snapshot.child("descripcion").value.toString()
 
                 val producto = Producto(
                     id = id,
                     nombre = nombre,
                     precio = precio,
-                    cantidad = cantidad
+                    cantidad = cantidad,
+                    descripcion = descripcion
                 )
 
                 productList.add(producto)

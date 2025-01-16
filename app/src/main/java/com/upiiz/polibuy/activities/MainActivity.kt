@@ -63,7 +63,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun productoEspecifico(producto: Producto){
-
+        val productoIntent = Intent(this@MainActivity, ProductoEspecificoActivity::class.java)
+        productoIntent.putExtra("idProducto", producto.id)
+        productoIntent.putExtra("nombreProducto", producto.nombre)
+        productoIntent.putExtra("descripcionProducto", producto.descripcion) // Corregido
+        productoIntent.putExtra("precioProducto", producto.precio)
+        productoIntent.putExtra("cantidadProducto", producto.cantidad)
+        productoIntent.putExtra("idUsuario", idUsuario)
+        startActivity(productoIntent)
     }
 
     private fun cargarProductos(){
@@ -75,8 +82,8 @@ class MainActivity : AppCompatActivity() {
             for (snapshot in dataSnapshot.children) {
                 val id = snapshot.child("id").value.toString()
                 val nombre = snapshot.child("nombre").value.toString()
-                val precio = snapshot.child("precio").value.toString().toIntOrNull()
-                val cantidad = snapshot.child("cantidad").value.toString().toIntOrNull()
+                val precio = snapshot.child("precio").getValue(Int::class.java)
+                val cantidad = snapshot.child("cantidad").getValue(Int::class.java)
 
                 val producto = Producto(
                     id = id,

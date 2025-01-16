@@ -48,11 +48,11 @@
         app:layout_constraintTop_toBottomOf="@id/productName" />
 
     <TextView
-        android:id="@+id/productAvailability"
+        android:id="@+id/productQuantity"
         android:layout_width="80dp"
         android:layout_height="25dp"
         android:layout_marginTop="8dp"
-        android:text="Disponible"
+        android:text=""
         android:textColor="@android:color/holo_green_dark"
         android:textSize="14sp"
         android:textStyle="bold"
