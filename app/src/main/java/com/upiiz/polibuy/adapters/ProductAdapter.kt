@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectofinal.data.Producto
-
 import android.view.View
 import android.widget.TextView
 import com.upiiz.polibuy.R
@@ -12,7 +11,7 @@ import com.upiiz.polibuy.R
 
 class ProductAdapter (
     private val productList: MutableList<Producto>,
-    private val addCar: (Producto) -> Unit,    // Callback para click corto
+private val addCar: (Producto) -> Unit,    // Callback para click corto
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)

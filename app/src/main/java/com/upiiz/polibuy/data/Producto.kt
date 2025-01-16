@@ -5,5 +5,5 @@ data class Producto(
     val nombre: String?=null,
     val descripcion: String?=null,
     val precio: Int?=null,
-    val cantidad: Int?=null,
+    var cantidad: Int?=null,
 )
