@@ -1,8 +1,10 @@
 package com.upiiz.polibuy.activities
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,8 +23,10 @@ import com.upiiz.polibuy.adapters.CarAdapter
 class CarritoActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productCarAdapter: CarAdapter
-    private val productList =  mutableListOf<Producto>()
-    private var idUsuario: String?=""
+    private val productList = mutableListOf<Producto>()
+    private var idUsuario: String? = ""
+    private lateinit var tvTotal: TextView // TextView para mostrar el total
+    private lateinit var tvArticulos: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,10 @@ class CarritoActivity : AppCompatActivity() {
         }
 
         idUsuario = intent.getStringExtra("idUsuario")
+        tvTotal = findViewById(R.id.tv_total) // Vincula el TextView con su ID
+        tvArticulos = findViewById(R.id.tv_articulos_carrito)
 
+        val btnvolver = findViewById<Button>(R.id.btn_volver)
         val btnpago = findViewById<Button>(R.id.btn_proceder_pago)
 
         btnpago.setOnClickListener {
@@ -43,13 +50,18 @@ class CarritoActivity : AppCompatActivity() {
             PagoIntent.putExtra("idUsuario", idUsuario)
             startActivity(PagoIntent)
         }
+        btnvolver.setOnClickListener {
+            val intent = Intent(this@CarritoActivity, MainActivity::class.java)
+            intent.putExtra("idUsuario", idUsuario)
+            startActivity(intent)
+        }
+
 
         recyclerView = findViewById(R.id.recycler_productos)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        productCarAdapter = CarAdapter(
-            productList
-        )
+        productCarAdapter = CarAdapter(productList)
         recyclerView.adapter = productCarAdapter
+
         cargarProductosDelCarrito(idUsuario)
     }
 
@@ -64,7 +76,7 @@ class CarritoActivity : AppCompatActivity() {
             val productIds = mutableListOf<String>()
 
             for (carritoSnapshot in dataSnapshot.children) {
-                val userIdInCarrito = carritoSnapshot.child("usuarioId").value.toString() //checar de la base de datos
+                val userIdInCarrito = carritoSnapshot.child("usuarioId").value.toString()
                 if (userIdInCarrito == idUsuario) {
                     val productId = carritoSnapshot.child("productoId").value.toString()
                     productIds.add(productId)
@@ -76,11 +88,14 @@ class CarritoActivity : AppCompatActivity() {
             }
 
             Tasks.whenAllSuccess<DataSnapshot>(productTasks).addOnSuccessListener { snapshots ->
+                var totalPrice = 0
+                var totalItems = 0
+
                 for (snapshot in snapshots) {
                     val id = snapshot.child("id").value.toString()
                     val nombre = snapshot.child("nombre").value.toString()
-                    val precio = snapshot.child("precio").getValue(Int::class.java)
-                    val cantidad = snapshot.child("cantidad").getValue(Int::class.java)
+                    val precio = snapshot.child("precio").getValue(Int::class.java) ?: 0
+                    val cantidad = snapshot.child("cantidad").getValue(Int::class.java) ?: 1
                     val urlImagen = snapshot.child("urlImagen").value.toString()
 
                     val producto = Producto(
@@ -92,8 +107,12 @@ class CarritoActivity : AppCompatActivity() {
                     )
 
                     productList.add(producto)
+                    totalPrice += precio * cantidad
+                    totalItems += cantidad
                 }
                 productCarAdapter.notifyDataSetChanged()
+                updateTotalText(totalPrice) // Actualiza el texto del total
+                updateTotalItems(totalItems) // Actualiza el texto de los artículos
             }.addOnFailureListener {
                 Toast.makeText(this, "Error al cargar productos", Toast.LENGTH_SHORT).show()
             }
@@ -102,4 +121,16 @@ class CarritoActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateTotalText(totalPrice: Int) {
+        tvTotal?.let {
+            val totalText = "Total: $${totalPrice}"
+            it.text = totalText
+        } ?: run {
+            Toast.makeText(this, "Error al actualizar el total", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun updateTotalItems(totalItems: Int) {
+        val itemsText = "Artículos en carrito: $totalItems"
+        tvArticulos.text = itemsText
+    }
 }
