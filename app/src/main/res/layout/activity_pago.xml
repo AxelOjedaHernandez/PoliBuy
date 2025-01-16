@@ -53,22 +53,22 @@
                 android:textStyle="bold"
                 android:textColor="#333" />
 
-            <TextView
-                android:id="@+id/tvUserEmail"
+            <EditText
+                android:id="@+id/etUserEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Correo: usuario@ejemplo.com"
+                android:hint="Correo: usuario@ejemplo.com"
                 android:textSize="14sp"
-                android:textColor="#666"
+                android:textColorHint="#666"
                 android:paddingTop="8dp" />
 
-            <TextView
-                android:id="@+id/tvUserPhone"
+            <EditText
+                android:id="@+id/etUserPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teléfono: +1234567890"
+                android:hint="Teléfono: 1234567890"
                 android:textSize="14sp"
-                android:textColor="#666"
+                android:textColorHint="#666"
                 android:paddingTop="4dp" />
         </LinearLayout>
 
@@ -90,11 +90,11 @@
                 android:textStyle="bold"
                 android:textColor="#333" />
 
-            <TextView
-                android:id="@+id/tvUserAddress"
+            <EditText
+                android:id="@+id/edUserAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calle Ejemplo #123, Ciudad, País"
+                android:hint="Calle Ejemplo #123, Ciudad, País"
                 android:textSize="14sp"
                 android:textColor="#666"
                 android:paddingTop="8dp" />

@@ -10,8 +10,15 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.firebase.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 
 
 class CarAdapter(
@@ -21,6 +28,8 @@ class CarAdapter(
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_producto_carrito, parent, false)
         return ProductCarViewHolder(view)
     }
+    private val database = Firebase.database
+    private val carritosRef = database.getReference("Carritos")
 
     override fun onBindViewHolder(holder: ProductCarViewHolder, position: Int) {
         var producto = productList[position]
@@ -61,6 +70,28 @@ class CarAdapter(
                 // No hacer nada
             }
         }
+
+        holder.btn_eliminar_producto.setOnClickListener {
+            eliminarProductoCarrito(producto.id)
+        }
+    }
+
+    private fun eliminarProductoCarrito(idProducto: String?) {
+        // Eliminar todos los carritos del usuario
+        carritosRef.orderByChild("productoId").equalTo(idProducto).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (carritoSnapshot in snapshot.children) {
+                        carritoSnapshot.ref.removeValue()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //Toast.makeText(this@CarritoActivity, "Error al eliminar producto del carrito: ${error.message}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun getItemCount(): Int = productList.size
@@ -71,6 +102,7 @@ class CarAdapter(
         val itemProductDescription: TextView = itemView.findViewById(R.id.descripcion_producto)
         val itemQuantitySpinner: Spinner = itemView.findViewById(R.id.spinner_cantidad)
         val itemProductImage: ImageView = itemView.findViewById(R.id.imagen_producto)
+        val btn_eliminar_producto: ImageButton = itemView.findViewById(R.id.btn_eliminar_producto)
 
     }
 }
