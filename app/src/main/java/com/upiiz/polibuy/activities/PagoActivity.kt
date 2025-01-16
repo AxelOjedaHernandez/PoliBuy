@@ -1,5 +1,6 @@
 package com.example.proyectofinal.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -8,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.upiiz.polibuy.R
+import com.upiiz.polibuy.activities.ProductoActivity
+import com.upiiz.polibuy.activities.ThanksActivity
 
 class PagoActivity : AppCompatActivity() {
 
@@ -23,6 +26,8 @@ class PagoActivity : AppCompatActivity() {
     private lateinit var btnPagarTarjeta: Button
     private lateinit var btnConfirmarEfectivo: Button
 
+    private var idUsuario: String? = null // Variable para almacenar el ID del usuario
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,6 +38,16 @@ class PagoActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        // Obtener el idUsuario desde el intent
+        idUsuario = intent.getStringExtra("idUsuario")
+        val btnConfirmarPago = findViewById<Button>(R.id.btnConfirmar)
+
+        btnConfirmarPago.setOnClickListener {
+           val confirmarPagoIntent = Intent(this@PagoActivity, ThanksActivity::class.java)
+           confirmarPagoIntent.putExtra("idUsuario", idUsuario)
+           startActivity(confirmarPagoIntent)
+
         }
 
         // Inicializamos las vistas
