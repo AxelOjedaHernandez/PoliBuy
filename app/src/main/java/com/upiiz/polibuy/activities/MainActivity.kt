@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         productoIntent.putExtra("precioProducto", producto.precio)
         productoIntent.putExtra("cantidadProducto", producto.cantidad)
         productoIntent.putExtra("idUsuario", idUsuario)
+        productoIntent.putExtra("urlImagen", producto.urlImagen)
         startActivity(productoIntent)
     }
 
@@ -84,12 +85,16 @@ class MainActivity : AppCompatActivity() {
                 val nombre = snapshot.child("nombre").value.toString()
                 val precio = snapshot.child("precio").getValue(Int::class.java)
                 val cantidad = snapshot.child("cantidad").getValue(Int::class.java)
+                val descripcion = snapshot.child("descripcion").value.toString()
+                val urlImagen = snapshot.child("urlImagen").value.toString()
 
                 val producto = Producto(
                     id = id,
                     nombre = nombre,
                     precio = precio,
-                    cantidad = cantidad
+                    cantidad = cantidad,
+                    descripcion = descripcion,
+                    urlImagen = urlImagen
                 )
 
                 productList.add(producto)

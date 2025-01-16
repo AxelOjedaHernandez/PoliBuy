@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectofinal.data.Producto
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.upiiz.polibuy.R
-
+import com.bumptech.glide.Glide
 
 class ProductAdapter (
     private val productList: MutableList<Producto>,
@@ -25,6 +26,13 @@ private val addCar: (Producto) -> Unit,    // Callback para click corto
         holder.itemProductPrice.text = produ.precio?.toString() ?: "0"
         holder.itemProductquantity.text = produ.cantidad?.toString() ?: "0"
 
+        // Cargar la imagen usando Glide
+        Glide.with(holder.itemView.context)
+            .load(produ.urlImagen)  // URL de la imagen
+            .placeholder(R.drawable.carrito) // Imagen temporal mientras carga
+            .error(R.drawable.carrito) // Imagen en caso de error
+            .into(holder.itemProductImage)
+
         // Configurar eventos de click corto y largo
         holder.itemView.setOnClickListener {
             addCar(produ) // Llamar al callback de click corto
@@ -37,5 +45,6 @@ private val addCar: (Producto) -> Unit,    // Callback para click corto
         val itemProductName: TextView = itemView.findViewById(R.id.itemProductName)
         val itemProductPrice: TextView = itemView.findViewById(R.id.itemProductPrice)
         val itemProductquantity: TextView = itemView.findViewById(R.id.itemProductquantity)
+        val itemProductImage: ImageView = itemView.findViewById(R.id.itemProductImage)
     }
 }

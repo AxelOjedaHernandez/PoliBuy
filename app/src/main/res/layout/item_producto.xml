@@ -18,11 +18,12 @@
         <ImageView
             android:id="@+id/itemProductImage"
             android:layout_width="91dp"
-            android:layout_height="wrap_content"
+            android:layout_height="91dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="Imagen del producto"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:adjustViewBounds="true"/>
+
 
         <!-- Información del producto -->
         <LinearLayout

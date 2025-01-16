@@ -9,8 +9,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.upiiz.polibuy.R
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.proyectofinal.data.Carrito
 import com.example.proyectofinal.data.Usuario
 import com.google.firebase.Firebase
@@ -23,10 +25,12 @@ class ProductoEspecificoActivity : AppCompatActivity() {
 
     private var idProducto: String?=""
     private var nombreProducto: String?=""
-    private var descripcioProducto: String?=""
+    private var descripcionProducto: String?=""
     private var precioProducto: Int=0
     private var cantidadProducto: Int=0
     private var idUsuario: String?=""
+    private var urlImagen: String?=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,24 +43,33 @@ class ProductoEspecificoActivity : AppCompatActivity() {
 
         idProducto = intent.getStringExtra("idProducto")
         nombreProducto = intent.getStringExtra("nombreProducto")
-        descripcioProducto = intent.getStringExtra("descripcioProducto")
+        descripcionProducto = intent.getStringExtra("descripcionProducto")
         precioProducto = intent.getIntExtra("precioProducto", 0) // Valor predeterminado: 0
         cantidadProducto = intent.getIntExtra("cantidadProducto", 0) // Valor predeterminado: 0
-
+        urlImagen = intent.getStringExtra("urlImagen")
         idUsuario = intent.getStringExtra("idUsuario")
 
         val tvProductName = findViewById<TextView>(R.id.productName)
         val tvProductDescription = findViewById<TextView>(R.id.productDescription)
         val tvProductPrice = findViewById<TextView>(R.id.productPrice)
         val tvProductQuantity = findViewById<TextView>(R.id.productQuantity)
+        val imgProducto = findViewById<ImageView>(R.id.productImage)
+
         val btnaddToCart = findViewById<Button>(R.id.addToCartButton)
         val btnBack = findViewById<Button>(R.id.backButton)
 
         // Asignar datos a los TextViews
         tvProductName.text = nombreProducto ?: "Producto no disponible"
-        tvProductDescription.text = descripcioProducto ?: "Sin descripción"
+        tvProductDescription.text = descripcionProducto ?: "Sin descripción"
         tvProductPrice.text = "Precio: ${precioProducto ?: "No disponible"}"
         tvProductQuantity.text = "Cantidad: ${cantidadProducto ?: "No disponible"}"
+
+        // Cargar la imagen usando Glide
+        Glide.with(this)
+            .load(urlImagen) // URL de la imagen
+            .placeholder(R.drawable.carrito) // Imagen temporal mientras carga
+            .error(R.drawable.carrito) // Imagen en caso de error
+            .into(imgProducto) // Asignar al ImageView correcto
 
         // Botón para agregar al carrito (sin funcionalidad por ahora)
         val btnAddToCart = findViewById<Button>(R.id.addToCartButton)

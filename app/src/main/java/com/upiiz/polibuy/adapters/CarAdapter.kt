@@ -10,6 +10,8 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 
 
 class CarAdapter(
@@ -26,6 +28,13 @@ class CarAdapter(
         holder.itemProductName.text = producto.nombre
         holder.itemProductPrice.text = "$${producto.precio ?: 0}"
         holder.itemProductDescription.text = "Descripción, color, tamaño" // Cambiar si tienes detalles específicos
+
+        // Cargar la imagen usando Glide
+        Glide.with(holder.itemView.context)
+            .load(producto.urlImagen)  // URL de la imagen
+            .placeholder(R.drawable.carrito) // Imagen temporal mientras carga
+            .error(R.drawable.carrito) // Imagen en caso de error
+            .into(holder.itemProductImage)
 
         // Configurar opciones para el spinner
         val quantities = (1..10).toList() // Rango de cantidades disponibles
@@ -54,7 +63,6 @@ class CarAdapter(
         }
     }
 
-
     override fun getItemCount(): Int = productList.size
 
     class ProductCarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -62,6 +70,7 @@ class CarAdapter(
         val itemProductPrice: TextView = itemView.findViewById(R.id.precio_producto)
         val itemProductDescription: TextView = itemView.findViewById(R.id.descripcion_producto)
         val itemQuantitySpinner: Spinner = itemView.findViewById(R.id.spinner_cantidad)
+        val itemProductImage: ImageView = itemView.findViewById(R.id.imagen_producto)
 
     }
 }
