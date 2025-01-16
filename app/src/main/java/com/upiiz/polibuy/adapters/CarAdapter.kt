@@ -61,7 +61,6 @@ class CarAdapter(
         val itemProductName: TextView = itemView.findViewById(R.id.nombre_producto)
         val itemProductPrice: TextView = itemView.findViewById(R.id.precio_producto)
         val itemProductDescription: TextView = itemView.findViewById(R.id.descripcion_producto)
-        val itemProductquantity: TextView = itemView.findViewById(R.id.itemProductquantity)
         val itemQuantitySpinner: Spinner = itemView.findViewById(R.id.spinner_cantidad)
 
     }

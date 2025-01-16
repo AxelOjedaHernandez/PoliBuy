@@ -1,6 +1,8 @@
 package com.upiiz.polibuy.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proyectofinal.activities.PagoActivity
 import com.example.proyectofinal.data.Producto
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Firebase
@@ -33,6 +36,14 @@ class CarritoActivity : AppCompatActivity() {
         }
 
         idUsuario = intent.getStringExtra("idUsuario")
+
+        val btnpago = findViewById<Button>(R.id.btn_proceder_pago)
+
+        btnpago.setOnClickListener {
+            val PagoIntent = Intent(this@CarritoActivity, PagoActivity::class.java)
+            PagoIntent.putExtra("idUsuario", idUsuario)
+            startActivity(PagoIntent)
+        }
 
         recyclerView = findViewById(R.id.recycler_productos)
         recyclerView.layoutManager = LinearLayoutManager(this)
